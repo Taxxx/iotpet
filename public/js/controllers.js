@@ -1,5 +1,28 @@
 angular.module("FinalApp")
-.controller("MainController", function($scope,$resource,PostResource){
+.controller("MainController", function($scope,LxDialogService,LxNotificationService){
+	//$scope.title = "Login";
+	$scope.opendDialog = function(dialogId)
+	{
+	    LxDialogService.open(dialogId);
+	};
+
+	$scope.closingDialog = function()
+	{
+	    LxNotificationService.info('Login closed!');
+	};
+
+
+	$scope.Login = function(user){
+		debugger;
+		alert(user);
+		/*PostResource.save({data: $scope.post},function(data){
+			console.log(data);
+			$location.path("/");
+		});*/
+	}
+
+})
+.controller("BodyController", function($scope,$resource,PostResource){
 	User = $resource("http://jsonplaceholder.typicode.com/users/:id",{id:"@id"});
 
 	$scope.posts = PostResource.query();
@@ -16,20 +39,6 @@ angular.module("FinalApp")
 		});
 
 	}
-
-})
-.controller("MenuController", function($scope,LxDialogService,LxNotificationService){
-	//$scope.title = "Login";
-	$scope.opendDialog = function(dialogId)
-	{
-	    LxDialogService.open(dialogId);
-	};
-
-	$scope.closingDialog = function()
-	{
-	    LxNotificationService.info('Login closed!');
-	};
-
 
 })
 .controller("PostController", function($scope,PostResource,$routeParams,$location){
