@@ -5,6 +5,10 @@ angular.module("FinalApp",["lumx","ngRoute","ngResource"])
 			controller: "BodyController",
 			templateUrl: "templates/home.html"
 		})
+		.when("/maps/:id", {
+			controller: "MapsController",
+			templateUrl: "templates/maps.html"
+		})
 		.when("/post/:id",{
 			controller: "PostController",
 			templateUrl: "templates/post.html"
