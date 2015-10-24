@@ -1,0 +1,22 @@
+{
+  "name": "rescue_patrol",
+  "version": "1.0.0",
+  "description": "RIOT2-PROJECT",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taxxx/rescue_patrol.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taxxx/rescue_patrol/issues"
+  },
+  "homepage": "https://github.com/Taxxx/rescue_patrol#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
