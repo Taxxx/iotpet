@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RescuePatrol</title>
+	<title>Riot2</title>
 	<link rel="stylesheet" type="text/css" href="css/materialdesignicons.css">
 	<link rel="stylesheet" type="text/css" href="css/lumx.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -23,10 +23,10 @@
 	<script src="js/controllers.js"></script>
 </head>
 <body>
-	<nav>
+	<nav ng-controller="MenuController">
 		<div class="bgc-blue-900 tc-white" flex-container="row" flex-align="center center">
 			<div flex-item="4">
-				<h1 class="fs-display-3 display-block">RescuePatrol</h1>
+				<h1 class="fs-display-3 display-block">IotPet</h1>
 			</div>
 			<div flex-item="1">
 				<a href="#/">Inicio</a>
@@ -34,6 +34,53 @@
 			<div flex-item="1">
 				<a href="#/posts/new">Crear Post</a>
 			</div>
+
+
+			<div flex-item="1">
+				<!--a href="#">Login</a-->
+
+				<button class="btn btn--m btn--white btn--flat" ng-click="opendDialog('test')" lx-ripple>Log in</button>
+
+				<lx-dialog class="dialog dialog--l" id="test" auto-close="true" onclose="closingDialog()" onscrollend="scrollEndDialog()">
+				    <div class="dialog__header">
+				        <div class="toolbar bgc-light-blue-500 pl++">
+				            <span class="toolbar__label tc-white fs-title">
+				                Log in
+				            </span>
+
+				            <div class="toolbar__right">
+				                <!--button class="btn btn--l btn--white btn--icon" lx-ripple ng-click="addPerson()">
+				                    <i class="mdi mdi-plus"></i>
+				                </button-->
+				                <button class="btn btn--l btn--white btn--icon" lx-ripple lx-dialog-close>
+				                	<i class="mdi mdi-close"></i>
+				                </button>
+				            </div>
+				        </div>
+				    </div>
+
+				    <div class="dialog__content">
+				        
+				    	<form ng-submit="Login()">
+				            <lx-text-field label="Username" fixed-label="true" icon="account">
+				                <input type="text" ng-model="textFields.fixedFirstName">
+				            </lx-text-field>
+
+				            <lx-text-field label="Password" fixed-label="true" icon="key">
+				                <input type="text" ng-model="textFields.fixedLastName">
+				            </lx-text-field>
+
+				        </form>
+
+				    </div>
+
+				    <div class="dialog__actions">
+				        <button class="btn btn--m btn--red btn--raised" lx-ripple lx-dialog-close>Cancel</button>
+				        <button class="btn btn--m btn--green btn--raised" lx-ripple>Log in</button>
+				    </div>
+				</lx-dialog>
+			</div>
+
 		</div>
 	</nav>
 

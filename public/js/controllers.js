@@ -18,6 +18,20 @@ angular.module("FinalApp")
 	}
 
 })
+.controller("MenuController", function($scope,LxDialogService,LxNotificationService){
+	//$scope.title = "Login";
+	$scope.opendDialog = function(dialogId)
+	{
+	    LxDialogService.open(dialogId);
+	};
+
+	$scope.closingDialog = function()
+	{
+	    LxNotificationService.info('Login closed!');
+	};
+
+
+})
 .controller("PostController", function($scope,PostResource,$routeParams,$location){
 	$scope.title = "Editar Post";
 	$scope.post = PostResource.get({id: $routeParams.id});
