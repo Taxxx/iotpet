@@ -84,6 +84,7 @@ arduino_server.on("message", function (msg, rinfo) {
 //Actualiza Datos
 app.io.broadcast('data_arduino', arduinoJson);
 
+	
 });
 
 //Socket_Arduino

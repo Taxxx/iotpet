@@ -1,7 +1,27 @@
 angular.module("FinalApp")
-.controller("MainController", function($scope,LxDialogService,LxNotificationService){
+.controller("MainController", function($scope,LxDialogService,LxNotificationService,Riot){
 	//$scope.title = "Login";
 	$scope.user = {};
+
+	/*Riot.login()
+		.success(function(data) {
+			$scope.apiKey = data.apiKey;
+			debugger;
+			//debugger;
+			//$scope.pets = data;
+			//$scope.loading = false;
+		});*/
+
+
+	/*Riot.addData($scope.apiKey,'-68.088135;-16.541182;0.0',null,null,'1')
+		.success(function(data) {
+			//$scope.apiKey = data.apiKey;
+			//debugger;
+			//$scope.pets = data;
+			//$scope.loading = false;
+		});*/
+
+		
 	$scope.Login = function(){
 		//debugger;
 		//alert($scope.user.username);
@@ -116,7 +136,7 @@ angular.module("FinalApp")
 			});
 		}
 	})
-	.controller("ChartsController", function($scope,PostResource,$location){
+	.controller("ChartsController", function($scope,PostResource,$location,Riot){
 		//$(document).on('ready',init);
 		$scope.data = {};
 		$scope.chart = {};
@@ -138,6 +158,16 @@ angular.module("FinalApp")
 		$scope.startSocket =function(series){
 			window.io = io.connect();
 			io.on('data_arduino', function(data){
+
+				Riot.addData($scope.apiKey,'-68.088135;-16.541182;0.0',null,null,data.temperatura)
+					.success(function(data) {
+						//$scope.apiKey = data.apiKey;
+						//debugger;
+						//$scope.pets = data;
+						//$scope.loading = false;
+					});
+
+				
 				//debugger;
 				console.log(data.temperatura);
 				//$('#list_socket').append('<li>'+data.val+'</li>');

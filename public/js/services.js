@@ -15,4 +15,70 @@ angular.module("FinalApp")
 			return $http.delete('/api/pets/' + id);
 		}
 	}
-}]);
+}])
+.factory('Riot', ['$http',function($http) {
+	var params_login = {
+		"username": "arduino5", 
+    	"password": "bth101"
+	};
+
+	
+
+
+	return {
+		login : function() {
+
+			var http = $http({
+				method: 'POST',
+			  	url: 'http://vizix.hackiot.com:8080/riot-core-services/api/user/login',
+			  	data: params_login });
+			return http;
+
+			//return $http.post('http://vizix.hackiot.com:8080/riot-core-services/api/user/login',{username:"arduino",password:"bth101"});
+		},
+		addData : function(api_key,location,timestamp,locationXYZ,temperature) {
+			//debugger;
+			var params_data = {
+				"group": ">hackathon>arduino5",
+				"name": "Pet",
+				"serialNumber": "c1",
+				"thingTypeCode": "gps",
+				"udfs": {
+							"location": {
+											//"value": "-68.084831;-16.541728;0.0"
+											"value": location
+									 	},
+							"timestamp": {
+											//"value": "346543"
+											"value": timestamp
+								   		 },
+							"locationXYZ": {
+												//"value": "6"
+												"value": locationXYZ
+								   		   },
+							"temperature": {
+												//"value": "71"
+												"value": temperature
+										   }
+				}
+			};
+
+
+			var http = $http({
+				method: 'PATCH',
+				url: '//vizix.hackiot.com:8080/riot-core-services/api/thing/89',
+			  	headers: {
+			  		Api_key: '9bbcee173d45495c826debae966b5b9650d25aac6350a30f9272c7ce69007dcc'
+			  		//Api_key: api_key
+			  	},
+
+			  	data: params_data });
+			return http;
+
+			//return $http.post('http://vizix.hackiot.com:8080/riot-core-services/api/user/login',{username:"arduino",password:"bth101"});
+		}
+
+	}
+}])
+
+;
