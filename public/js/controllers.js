@@ -120,6 +120,7 @@ angular.module("FinalApp")
 		//$(document).on('ready',init);
 		$scope.data = {};
 		$scope.chart = {};
+		$scope.type= 1;
 		$scope.init = function(){
 			$scope.configHchart();
 			$scope.controlContainer(data());
@@ -136,44 +137,48 @@ angular.module("FinalApp")
 		}
 
 		$scope.startSocket =function(series){
+
 			window.io = io.connect();
-			io.on('data_arduino', function(data){
-				//debugger;
-				console.log(data.temperatura);
-				//$('#list_socket').append('<li>'+data.val+'</li>');
+			if(window.io !== 'undefined'){
+				io.on('data_arduino', function(data){
+					//debugger;
+					console.log(data.temperatura);
+					//$('#list_socket').append('<li>'+data.val+'</li>');
 
-				tiempo = (new Date()).getTime(), // current time
+					tiempo = (new Date()).getTime(), // current time
 
-					//temperatura = Math.random();
+						temperatura = Math.random();
 
-					temperatura = parseInt(data.temperatura);
+					//temperatura = parseInt(data.temperatura);
+					//
+					console.log('foco: '+data.foco+' - ventilador: '+data.ventilador);
 
-				console.log('foco: '+data.foco+' - ventilador: '+data.ventilador);
+					series.addPoint([tiempo, temperatura], true, true);
 
-				series.addPoint([tiempo, temperatura], true, true);
+					if(temperatura<25)
+					{
+						//alert("temperatura baja");
+						//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+						$('#mensaje').prepend($('<li>').text("Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
+					}
+					if(temperatura>33)
+					{
+						//alert("temperatura baja");
+						//$('#alertas').prepend("<br><font color='red'>Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+						$('#mensaje').prepend($('<li>').text("Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#FF8040;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
+					}
+					if(temperatura >= 25 && temperatura <= 33)
+					{
+						//alert("temperatura baja");
+						//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+						$('#mensaje').prepend($('<li>').text("Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
+					}
 
-				if(temperatura<25)
-				{
-					//alert("temperatura baja");
-					//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-					$('#mensaje').prepend($('<li>').text("Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
-				}
-				if(temperatura>33)
-				{
-					//alert("temperatura baja");
-					//$('#alertas').prepend("<br><font color='red'>Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-					$('#mensaje').prepend($('<li>').text("Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#FF8040;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
-				}
-				if(temperatura >= 25 && temperatura <= 33)
-				{
-					//alert("temperatura baja");
-					//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-					$('#mensaje').prepend($('<li>').text("Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
-				}
+					//$scope.movimiento(data.foco,data.ventilador);
 
-				//$scope.movimiento(data.foco,data.ventilador);
+				});
+			}
 
-			});
 		};
 
 		 function printTemperatura(){
@@ -224,9 +229,32 @@ angular.module("FinalApp")
 			return data;
 		}
 
-		$scope.controlContainer = function(data,type){
+		$scope.controlContainer = function(data,type,index){
 			var chartType = type? type: 'spline';
-			var data = $scope.data? $scope.data : data();
+			//var data = $scope.data? $scope.data : data();
+			$scope.type= index ? index : 1;
+			var xAxis,yAxis;
+			var title = null;
+			if($scope.type === 1) {// temperatura
+				title = 'Temperature',
+				yAxis = 'Celsius Degrees'
+				xAxis = 'Date'
+			}
+			if($scope.type === 2) {// temperatura
+				title = 'Steps'
+				yAxis = '#Steps'
+				xAxis = 'Date'
+			}
+			if($scope.type === 3) {// temperatura
+				title = 'Heart Beats',
+				yAxis = 'heart beats'
+				xAxis = 'Date'
+			}
+			Highcharts.setOptions({
+				global:{
+					useUTC: false
+				}
+			});
 			$('#container').highcharts($scope.chart={
 				chart: {
 					type: chartType,
@@ -238,21 +266,22 @@ angular.module("FinalApp")
 					}
 				},
 				title: {
-					text: 'titulo'
+					text: title
 				},
 				subtitle:{
-					align:'center',text:'Click on the button to see reports'
+					align:'center',text:'Select other'
 				},
 				xAxis: {
 					title:{
-						text:'Tiempo actual'
+						text:xAxis
 					},
 					type: 'datetime',
 					tickPixelInterval: 100
 				},
+
 				yAxis: {
 					title: {
-						text: 'label X'
+						text: yAxis
 					},
 					plotLines: [{
 						value: 25,
@@ -273,7 +302,7 @@ angular.module("FinalApp")
 					enabled: false
 				},
 				exporting: {
-					enabled: true
+					enabled: false
 				},
 				series: [{
 					name: 'Data received',
@@ -307,10 +336,21 @@ angular.module("FinalApp")
 
 		},
 
+		$scope.showAdvancedTemperature	= function () {
+			if(1 !== $scope.type){
+				$scope.data = data();
+				$scope.controlTemperature();
+			}else{
+				$scope.controlTemperature();
+			}
+		},
+
 		$scope.changeMap = function (index){
 			console.log('asdasd');
-			$scope.data = data();
-			$scope.controlContainer($scope.data );
+			if(index !== $scope.type){
+				$scope.data = data();
+				$scope.controlContainer($scope.data,null,index );
+			}
 		},
 		$scope.changeType = function (type){
 			console.log('asdasd');
@@ -332,6 +372,147 @@ angular.module("FinalApp")
 			//$scope.series.removePoint(0);
 			$scope.series.addPoint([time,0.2], true,true);
 			//$scope.controlContainer($scope.data);
-		}
+		},
+
+			$scope.controlTemperature = function () {
+				$(function () {
+					var chart = new Highcharts.Chart({
+
+							chart: {
+								renderTo: 'container',
+								type: 'gauge',
+
+								plotBackgroundImage: null,
+								height: 200
+							},
+
+							title: {
+								text: '</br></br>Advanced Temperature Graphics'
+							},
+
+							pane: [{
+								startAngle: -45,
+								endAngle: 45,
+								background: null,
+								center: ['25%', '145%'],
+								size: 300
+							}, {
+
+								startAngle: -45,
+								endAngle: 45,
+								background: null,
+								center: ['75%', '145%'],
+								size: 300
+							}],
+
+							yAxis: [{
+								min: -20,
+								max: 80,
+								minorTickPosition: 'outside',
+								tickPosition: 'outside',
+								labels: {
+									rotation: 'auto',
+									distance: 20
+								},
+								plotBands: [{
+									from: -20,
+									to: 5,
+									color: '#aad4e5',
+									innerRadius: '100%',
+									outerRadius: '105%'
+								},{
+									from: 40,
+									to: 80,
+									color: '#C02316',
+									innerRadius: '100%',
+									outerRadius: '105%'
+								}
+								],
+								pane: 0,
+								title: {
+									text: 'TERMOMETER<br/><span style="font-size:8px">(°C)</span>',
+									y: -40
+								}
+							}, {
+								min: -20,
+								max: 60,
+								minorTickPosition: 'outside',
+								tickPosition: 'outside',
+								labels: {
+									rotation: 'auto',
+									distance: 20
+								},
+								plotBands: [{
+									from: -20,
+									to: 5,
+									color: '#aad4e5',
+									innerRadius: '100%',
+									outerRadius: '105%'
+								},{
+									from: 40,
+									to: 60,
+									color: '#C02316',
+									innerRadius: '100%',
+									outerRadius: '105%'
+								}
+								],
+								pane: 1,
+								title: {
+									text: 'TERMOMETER<br/><span style="font-size:8px">(°F)</span>',
+									y: -40
+								}
+							}],
+
+							plotOptions: {
+								gauge: {
+									dataLabels: {
+										enabled: false
+									},
+									dial: {
+										radius: '100%'
+									}
+								}
+							},
+
+
+							series: [{
+								data: [-20],
+								yAxis: 0
+							}, {
+								data: [-20],
+								yAxis: 1
+							}]
+
+						},
+
+						// Let the music play
+						function(chart) {
+							setInterval(function() {
+								var left = chart.series[0].points[0],
+									right = chart.series[1].points[0],
+									leftVal,
+									inc = (Math.random() - 0.8) * 50;
+
+								leftVal =  left.y - inc;
+								rightVal = leftVal + inc / 3;
+								if (leftVal < -20 || leftVal > 60) {
+									leftVal = (Math.random() - 0.8) * 20;;
+								}
+								if (rightVal < -20 || rightVal > 60) {
+									rightVal = (Math.random() - 0.8) * 20;
+								}
+
+								left.update(leftVal, false);
+								right.update(rightVal, false);
+								chart.redraw();
+
+							}, 500);
+
+						});
+				});
+				//$('#container').addClass('fixheight');
+
+			}
+
 
 	});

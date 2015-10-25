@@ -3,7 +3,11 @@ angular.module("FinalApp",["lumx","ngRoute","ngResource","ngTouch"])
 	$routeProvider
 		.when("/", {
 			controller: "BodyController",
-			templateUrl: "templates/home.html"
+			templateUrl: "templates/home1.html"
+		})
+		.when("/", {
+			controller: "BodyController",
+			templateUrl: "templates/home1.html"
 		})
 		.when("/users", {
 			controller: "UsersController",

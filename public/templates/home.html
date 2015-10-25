@@ -42,87 +42,96 @@
                                         <li><a class="dropdown-link" ng-click="changeMap(3)">heart beats</a></li>
                                         <li class="dropdown-divider"></li>
                                         <li><span class="dropdown-link dropdown-link--is-header">Type</span></li>
-                                        <li><a class="dropdown-link" ng-click="changeType('spline')">Spline</a> </li>
+                                        <li><a class="dropdown-link" ng-click="changeType('spline')">Spline</a></li>
                                         <li><a class="dropdown-link" ng-click="changeType('column')">Column</a></li>
                                         <li><a class="dropdown-link" ng-click="changeType('area')">Range</a></li>
                                         <li><a class="dropdown-link">Separated link</a></li>
                                     </ul>
                                 </lx-dropdown-menu>
                             </lx-dropdown>
-                            <lx-dropdown>
-                                <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
-                                        lx-dropdown-toggle>
-                                    Temperature
-                                </button>
+                            <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple ng-click="showAdvancedTemperature()">
+                                Temperature
+                            </button>
+                            <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple ng-click ="showAdvancedSteps()">
+                                Steps
+                            </button>
+                            <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple ng-click ="showAdvancedHeart()">
+                                Heart beats
+                            </button>
 
-                                <lx-dropdown-menu>
-                                    <ul>
-                                        <li><a class="dropdown-link" ng-click="changeMap()">map 1</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li><span class="dropdown-link dropdown-link--is-header">Header</span></li>
-                                        <li><a class="dropdown-link">Separated link</a></li>
-                                    </ul>
-                                </lx-dropdown-menu>
-                            </lx-dropdown>
-                            <lx-dropdown>
-                                <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
-                                        lx-dropdown-toggle>
-                                    Steps
-                                </button>
-
-                                <lx-dropdown-menu>
-                                    <ul>
-                                        <li><a class="dropdown-link" ng-click="changeMap()">map 1</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li><span class="dropdown-link dropdown-link--is-header">Header</span></li>
-                                        <li><a class="dropdown-link">Separated link</a></li>
-                                    </ul>
-                                </lx-dropdown-menu>
-                            </lx-dropdown>
-                            <lx-dropdown>
-                                <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
-                                        lx-dropdown-toggle>
-                                    Heart beats
-                                </button>
-
-                                <lx-dropdown-menu>
-                                    <ul>
-                                        <li><a class="dropdown-link" ng-click="changeMap()">map 1</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li><span class="dropdown-link dropdown-link--is-header">Header</span></li>
-                                        <li><a class="dropdown-link">Separated link</a></li>
-                                    </ul>
-                                </lx-dropdown-menu>
-                            </lx-dropdown>
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <br><br><br>
+
 
                                     <div id="container"
-                                         style="min-width: 310px; height: 400px; margin: 0 auto background:black"></div>
+                                         style="min-width: 310px; height: auto; margin: 0 auto background:black"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div flex-container="row" flex-gutter="24">
+
+
+                        <div class="mt++" flex-container="row" flex-gutter="24">
                             <div flex-item>
-                                <lx-text-field label="Add Value">
-                                    <input type="text" ng-model="dataX" ng-change="SetGraphic(dataX)">
-                                </lx-text-field>
+                                <form>
+                                    <lx-text-field label="First and last name" fixed-label="true" icon="account">
+                                        <input type="text" ng-model="textFields.fixedFirstName">
+                                    </lx-text-field>
+
+                                    <lx-text-field label="Phone number" fixed-label="true" icon="phone">
+                                        <input type="text" ng-model="textFields.fixedLastName">
+                                    </lx-text-field>
+
+                                    <lx-text-field label="Email address" fixed-label="true" icon="email">
+                                        <input type="email" ng-model="textFields.fixedEmail">
+                                    </lx-text-field>
+
+                                    <lx-text-field label="Location" fixed-label="true" icon="city">
+                                        <input type="text" ng-model="textFields.fixedAdress">
+                                    </lx-text-field>
+                                </form>
                             </div>
 
                             <div flex-item>
-                                <lx-text-field label="First name">
-                                    <input type="text" ng-model="dataY" ng-change="SetGraphic(dataY)">
-                                </lx-text-field>
+                                <form>
+                                    <lx-text-field label="First name" fixed-label="true">
+                                        <input type="text" ng-model="textFields.fixedFirstName2">
+                                    </lx-text-field>
+
+                                    <lx-text-field label="Last name" fixed-label="true">
+                                        <input type="text" ng-model="textFields.fixedLastName2">
+                                    </lx-text-field>
+
+                                    <lx-text-field label="Email" fixed-label="true">
+                                        <input type="email" ng-model="textFields.fixedEmail2">
+                                    </lx-text-field>
+
+                                    <lx-text-field label="Address" fixed-label="true">
+                                        <input type="text" ng-model="textFields.fixedAdress2">
+                                    </lx-text-field>
+                                </form>
                             </div>
                         </div>
-                        <div class="card__actions">
-                            <a href="#">Ver usuarios</a>
 
-                        </div>
+                        <!--<div flex-container="row" flex-gutter="24">-->
+                            <!--<div flex-item>-->
+                                <!--<lx-text-field label="Add Value">-->
+                                    <!--<input type="text" ng-model="dataX" ng-change="SetGraphic(dataX)">-->
+                                <!--</lx-text-field>-->
+                            <!--</div>-->
+
+                            <!--<div flex-item>-->
+                                <!--<lx-text-field label="First name">-->
+                                    <!--<input type="text" ng-model="dataY" ng-change="SetGraphic(dataY)">-->
+                                <!--</lx-text-field>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="card__actions">-->
+                            <!--<a href="#">Ver usuarios</a>-->
+
+                        <!--</div>-->
 
                         </div>
                     </div>

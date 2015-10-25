@@ -7,3 +7,38 @@ a,a:visited{
 .top-space{
 	margin-top: 0;
 }
+.fixheigh{
+	height: 200px !important;
+}
+.fondo{
+	display: table;
+	width: 100%;
+	height: 100%;
+	padding: 380px 0 0px;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	color: #fff;
+	background: url(../imgs/pet.png) no-repeat bottom center scroll;
+	background-color: #000;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+
+}
+.tarjeta{
+	width: 400px;
+	height: 200px;
+	/*margin-top: 149px !important;*/
+
+}
+.titulo{
+margin-bottom: 33px;
+	top: 0;
+	margin-top: -240px;
+	margin-left: -850px;
+	color: #000;
+	font-size: 5em;
+	font-family: cursive;
+}
