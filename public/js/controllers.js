@@ -136,19 +136,19 @@ angular.module("FinalApp")
 			});
 		}
 	})
-	.controller("ChartsController", function($scope,PostResource,$location,Riot){
+	.controller("ChartsController", function($scope,PostResource,$location,Riot) {
 		//$(document).on('ready',init);
 		$scope.data = {};
 		$scope.chart = {};
-		$scope.type= 1;
-		$scope.init = function(){
+		$scope.type = 1;
+		$scope.init = function () {
 			$scope.configHchart();
 			$scope.controlContainer(data());
 
 			//startSocket();
 		};
 
-		$scope.configHchart= function(){
+		$scope.configHchart = function () {
 			Highcharts.setOptions({
 				global: {
 					useUTC: false
@@ -156,13 +156,13 @@ angular.module("FinalApp")
 			});
 		}
 
-		$scope.startSocket =function(series){
+		$scope.startSocket = function (series) {
 
 			window.io = io.connect();
-			io.on('data_arduino', function(data){
+			io.on('data_arduino', function (data) {
 
-				Riot.addData($scope.apiKey,'-68.088135;-16.541182;0.0',(new Date()).getTime(),null,data.temperatura,data.steps,data.heart,data.food)
-					.success(function(data) {
+				Riot.addData($scope.apiKey, '-68.088135;-16.541182;0.0', (new Date()).getTime(), null, data.temperatura, data.steps, data.heart, data.food)
+					.success(function (data) {
 						//$scope.apiKey = data.apiKey;
 						//debugger;
 						//$scope.pets = data;
@@ -174,41 +174,36 @@ angular.module("FinalApp")
 				console.log(data.temperatura);
 				//$('#list_socket').append('<li>'+data.val+'</li>');
 
-					tiempo = (new Date()).getTime(), // current time
+				tiempo = (new Date()).getTime(), // current time
 
-						temperatura = Math.random();
+					temperatura = Math.random();
 
-					//temperatura = parseInt(data.temperatura);
-					//
-					console.log('foco: '+data.foco+' - ventilador: '+data.ventilador);
+				//temperatura = parseInt(data.temperatura);
+				//
+				console.log('foco: ' + data.foco + ' - ventilador: ' + data.ventilador);
 
-					series.addPoint([tiempo, temperatura], true, true);
+				series.addPoint([tiempo, temperatura], true, true);
 
-					if(temperatura<25)
-					{
-						//alert("temperatura baja");
-						//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-						$('#mensaje').prepend($('<li>').text("Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
-					}
-					if(temperatura>33)
-					{
-						//alert("temperatura baja");
-						//$('#alertas').prepend("<br><font color='red'>Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-						$('#mensaje').prepend($('<li>').text("Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#FF8040;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
-					}
-					if(temperatura >= 25 && temperatura <= 33)
-					{
-						//alert("temperatura baja");
-						//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-						$('#mensaje').prepend($('<li>').text("Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
-					}
+				if (temperatura < 25) {
+					//alert("temperatura baja");
+					//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+					$('#mensaje').prepend($('<li>').text("Temperatura Baja: " + Highcharts.numberFormat(temperatura, 5) + " Hrs: " + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', tiempo) + "\n").attr('style', 'background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
+				}
+				if (temperatura > 33) {
+					//alert("temperatura baja");
+					//$('#alertas').prepend("<br><font color='red'>Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+					$('#mensaje').prepend($('<li>').text("Temperatura Alta: " + Highcharts.numberFormat(temperatura, 5) + " Hrs: " + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', tiempo) + "\n").attr('style', 'background:#FF8040;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
+				}
+				if (temperatura >= 25 && temperatura <= 33) {
+					//alert("temperatura baja");
+					//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+					$('#mensaje').prepend($('<li>').text("Temperatura Normal: " + Highcharts.numberFormat(temperatura, 5) + " Hrs: " + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', tiempo) + "\n").attr('style', 'background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
+				}
 
-					//$scope.movimiento(data.foco,data.ventilador);
+				//$scope.movimiento(data.foco,data.ventilador);
 
-				});
-			}
-
-		};
+			});
+		}
 
 		 function printTemperatura(){
 			var tiempo, temperatura;
