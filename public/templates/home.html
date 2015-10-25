@@ -13,7 +13,8 @@
                 </div>
                 <div class="card__actions">
                     <a href="#/pet/{{pet.id}}" class="btn btn--m btn--blue btn--flat" lx-ripple>Details</a>
-                    <a href="#/pets/edit/{{pet.id}}" class="btn btn--m btn--orange btn--flat" lx-ripple>Edit</a>
+                    <!--a href="#/pets/edit/{{pet.id}}" class="btn btn--m btn--orange btn--flat" lx-ripple>Edit</a-->
+                    <a ng-click="editPet(pet._id)"  class="btn btn--m btn--orange btn--flat" lx-ripple>Edit</a>
                     <a ng-click="removePet(pet._id)" class="btn btn--m btn--red btn--flat" lx-ripple>Delete</a>
                 </div>
             </div>

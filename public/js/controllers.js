@@ -130,14 +130,26 @@ angular.module("FinalApp")
 })
 .controller("PetController", function($scope,Pets,$routeParams,$location){
 	$scope.title = "Edit Pet Data";
-	$scope.pet = PostResource.get({id: $routeParams.id});
-	$scope.savePet = function(){
-		/*PostResource.update({id: $scope.pet.id},{data: $scope.pet},function(data){
-			console.log(data);
-			//$location.path("/");
-			$location.path("/pet/"+$scope.pet.id);
+
+	$scope.editPet = function(id){
+		Pets.getId(id)
+				// if successful creation, call our get function to get all the new todos
+				.success(function(data) {
+					$scope.loading = false;
+					$scope.pets = data; // assign our new list of todos
+				});
+
+		/*$scope.pets = $scope.pets.filter(function(element){
+			return element.id !== id;
 		});*/
+
 	}
+
+
+	/*$scope.pet = PostResource.get({id: $routeParams.id});
+	$scope.savePet = function(){
+		
+	}*/
 })
 .controller("NewPetController", function($scope,PostResource,$location,Pets){
 	$scope.pet = {};
@@ -186,7 +198,7 @@ angular.module("FinalApp")
 		};
 
 		$scope.configHchart = function () {
-			window.io = io.connect();
+			
 			Highcharts.setOptions({
 				global: {
 					useUTC: false
@@ -204,16 +216,17 @@ angular.module("FinalApp")
 		    function coords(position){
 		//        alert(position.coords.latitude);
 		//        alert(position.coords.longitude);
-				location = position.coords.latitude+";"+position.coords.longitude
+				location = position.coords.latitude+";"+position.coords.longitude+";0.0"
 		    }
 
 
 
-			
+			window.io = io.connect();
 			io.on('data_arduino', function (data) {
-
-				Riot.addData($scope.apiKey, location, (new Date()).getTime(), null, data.temperatura, data.steps, data.heart, data.food)
+				//debugger;
+				Riot.addData($scope.apiKey, /*'-68.088166;-16.541178;0.0'*/location, null, null, data.temperatura, data.steps, data.heart, data.food)
 					.success(function (data) {
+						//debugger;
 						//$scope.apiKey = data.apiKey;
 						//debugger;
 						//$scope.pets = data;

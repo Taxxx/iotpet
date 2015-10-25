@@ -7,6 +7,9 @@ angular.module("FinalApp")
 		get : function() {
 			return $http.get('/api/pets');
 		},
+		getId : function(id) {
+			return $http.get('/api/pets/'+id);
+		},
 		create : function(petData) {
 			return $http.post('/api/pets', petData);
 		},
