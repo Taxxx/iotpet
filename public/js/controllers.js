@@ -1,6 +1,16 @@
 angular.module("FinalApp")
 .controller("MainController", function($scope,LxDialogService,LxNotificationService){
 	//$scope.title = "Login";
+	$scope.user = {};
+	$scope.Login = function(){
+		//debugger;
+		//alert($scope.user.username);
+		/*PostResource.save({data: $scope.post},function(data){
+			console.log(data);
+			$location.path("/");
+		});*/
+	}
+
 	$scope.opendDialog = function(dialogId)
 	{
 	    LxDialogService.open(dialogId);
@@ -12,51 +22,44 @@ angular.module("FinalApp")
 	};
 
 
-	$scope.Login = function(user){
-		debugger;
-		alert(user);
-		/*PostResource.save({data: $scope.post},function(data){
-			console.log(data);
-			$location.path("/");
-		});*/
-	}
+	
 
 })
 .controller("BodyController", function($scope,$resource,PostResource){
 	User = $resource("http://jsonplaceholder.typicode.com/users/:id",{id:"@id"});
 
-	$scope.posts = PostResource.query();
+	$scope.pets = PostResource.query();
 	$scope.users = User.query();
 	// query() -> GET/posts -> Un arreglo de posts -> isArray: true 
-	$scope.removePost = function(post){
-		PostResource.delete({id: post.id},function(data){
+	$scope.removePost = function(pet){
+		PostResource.delete({id: pet.id},function(data){
 			//console.log(data);
 			//$scope.posts = Post.query(); // :D
 		});
 
-		$scope.posts = $scope.posts.filter(function(element){
-			return element.id !== post.id;
+		$scope.pets = $scope.pets.filter(function(element){
+			return element.id !== pet.id;
 		});
 
 	}
 
 })
-.controller("PostController", function($scope,PostResource,$routeParams,$location){
-	$scope.title = "Editar Post";
-	$scope.post = PostResource.get({id: $routeParams.id});
+.controller("PetController", function($scope,PostResource,$routeParams,$location){
+	$scope.title = "Edit Pet Data";
+	$scope.pet = PostResource.get({id: $routeParams.id});
 	$scope.savePost = function(){
-		PostResource.update({id: $scope.post.id},{data: $scope.post},function(data){
+		PostResource.update({id: $scope.pet.id},{data: $scope.pet},function(data){
 			console.log(data);
 			//$location.path("/");
-			$location.path("/post/"+$scope.post.id);
+			$location.path("/pet/"+$scope.pet.id);
 		});
 	}
 })
-.controller("NewPostController", function($scope,PostResource,$location){
-	$scope.post = {};
-	$scope.title = "Crear Post";
+.controller("NewPetController", function($scope,PostResource,$location){
+	$scope.pet = {};
+	$scope.title = "Add a New Pet";
 	$scope.savePost = function(){
-		PostResource.save({data: $scope.post},function(data){
+		PostResource.save({data: $scope.pet},function(data){
 			console.log(data);
 			$location.path("/");
 		});

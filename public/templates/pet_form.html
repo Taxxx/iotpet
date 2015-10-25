@@ -1,0 +1,41 @@
+<form ng-submit="savePet()">
+	<div class="card top-space">
+		<div class="p+">
+			<h1>{{title}}</h1>
+			<div flex-container="row">
+				<div flex-item>
+					<lx-text-field label="Nombre">
+						<input type="text" ng-model="pet.name">
+					</lx-text-field>
+				</div>
+			</div>
+
+			<div flex-container="row">
+				<div flex-item>
+					<lx-text-field label="Especie">
+						<textarea ng-model="pet.specie">
+
+						</textarea>
+					</lx-text-field>
+				</div>
+			</div>
+
+			
+			<div flex-container="row">
+				<div flex-item>
+					<lx-text-field label="Raza">
+						<textarea ng-model="pet.breed">
+
+						</textarea>
+					</lx-text-field>
+				</div>
+			</div>
+			<div flex-item>
+        		<lx-file-input label="Image..."></lx-file-input>
+    		</div>
+		</div>
+		<div class="card__actions">
+			<button type="submit" class="btn btn--blue btn--l btn--raised">Guardar</button>
+		</div>
+	</div>
+</form>
