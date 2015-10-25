@@ -77,11 +77,12 @@ angular.module("FinalApp")
 	})
 	.controller("ChartsController", function($scope,PostResource,$location){
 		//$(document).on('ready',init);
-		$scope.data = null;
-		$scope.chart = null;
+		$scope.data = {};
+		$scope.chart = {};
 		$scope.init = function(){
 			$scope.configHchart();
 			$scope.controlContainer(data());
+
 			//startSocket();
 		};
 
@@ -94,44 +95,44 @@ angular.module("FinalApp")
 		}
 
 		$scope.startSocket =function(series){
-			//io.on('data_arduino', function(data){
-			//	//debugger;
-			//	console.log(data.temperatura);
-			//	//$('#list_socket').append('<li>'+data.val+'</li>');
-            //
-			//	tiempo = (new Date()).getTime(), // current time
-            //
-			//		//temperatura = Math.random();
-            //
-			//		temperatura = parseInt(data.temperatura);
-            //
-			//	console.log('foco: '+data.foco+' - ventilador: '+data.ventilador);
-            //
-			//	series.addPoint([tiempo, temperatura], true, true);
-            //
-			//	if(temperatura<25)
-			//	{
-			//		//alert("temperatura baja");
-			//		//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-			//		$('#mensaje').prepend($('<li>').text("Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
-			//	}
-			//	if(temperatura>33)
-			//	{
-			//		//alert("temperatura baja");
-			//		//$('#alertas').prepend("<br><font color='red'>Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-			//		$('#mensaje').prepend($('<li>').text("Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#FF8040;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
-			//	}
-			//	if(temperatura >= 25 && temperatura <= 33)
-			//	{
-			//		//alert("temperatura baja");
-			//		//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
-			//		$('#mensaje').prepend($('<li>').text("Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
-			//	}
-            //
-			//	$scope.movimiento(data.foco,data.ventilador);
-            //
-			//});
-		}
+			$scope.$on('data_arduino', function(data){
+				//debugger;
+				console.log(data.temperatura);
+				//$('#list_socket').append('<li>'+data.val+'</li>');
+
+				tiempo = (new Date()).getTime(), // current time
+
+					//temperatura = Math.random();
+
+					temperatura = parseInt(data.temperatura);
+
+				console.log('foco: '+data.foco+' - ventilador: '+data.ventilador);
+
+				series.addPoint([tiempo, temperatura], true, true);
+
+				if(temperatura<25)
+				{
+					//alert("temperatura baja");
+					//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+					$('#mensaje').prepend($('<li>').text("Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
+				}
+				if(temperatura>33)
+				{
+					//alert("temperatura baja");
+					//$('#alertas').prepend("<br><font color='red'>Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+					$('#mensaje').prepend($('<li>').text("Temperatura Alta: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#FF8040;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
+				}
+				if(temperatura >= 25 && temperatura <= 33)
+				{
+					//alert("temperatura baja");
+					//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
+					$('#mensaje').prepend($('<li>').text("Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +"\n").attr('style','background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
+				}
+
+				//$scope.movimiento(data.foco,data.ventilador);
+
+			});
+		};
 
 		 function printTemperatura(){
 			var tiempo, temperatura;
@@ -142,6 +143,12 @@ angular.module("FinalApp")
 			 $scope.series = series;
 				 //setInterval(function () {}, 1000);
 			$scope.startSocket(series);
+			 //$scope.$emit('data_arduino', {
+			 //	//val: req.body.val
+			 //	temperatura: Math.random()*50,
+			 //	//foco: arduinoArray[1],
+			 //	//ventilador: arduinoArray[2]
+			 //});
 		}
 
 		function formato(){
@@ -175,10 +182,12 @@ angular.module("FinalApp")
 			return data;
 		}
 
-		$scope.controlContainer = function(data){
+		$scope.controlContainer = function(data,type){
+			var chartType = type? type: 'spline';
+			var data = $scope.data? $scope.data : data();
 			$('#container').highcharts($scope.chart={
 				chart: {
-					type: 'spline',
+					type: chartType,
 					animation: Highcharts.svg, // don't animate in old IE
 					marginRight: 10,
 					events: {
@@ -190,7 +199,7 @@ angular.module("FinalApp")
 					text: 'titulo'
 				},
 				subtitle:{
-					align:'center',text:'#################################################'
+					align:'center',text:'Click on the button to see reports'
 				},
 				xAxis: {
 					title:{
@@ -226,7 +235,7 @@ angular.module("FinalApp")
 				},
 				series: [{
 					name: 'Data received',
-					data: (data)
+					data: data
 				}]
 			});
 		},
@@ -256,10 +265,14 @@ angular.module("FinalApp")
 
 		},
 
-		$scope.changeMap = function (){
+		$scope.changeMap = function (index){
 			console.log('asdasd');
 			$scope.data = data();
 			$scope.controlContainer($scope.data );
+		},
+		$scope.changeType = function (type){
+			console.log('asdasd');
+			$scope.controlContainer($scope.data, type );
 		},
 		$scope.SetGraphic = function (xdata){
 			//console.log(xdata)

@@ -41,7 +41,7 @@
             </div>
         </div>
     </lx-tab>
-    <lx-tab heading="Maps">
+    <lx-tab heading="Graphics & Reports">
         <div class="card top-space">
             <div flex-container="row">
                 <div flex-item flex-container="column" ng-controller="MapsController">
@@ -51,7 +51,57 @@
                             <lx-dropdown>
                                 <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
                                         lx-dropdown-toggle>
-                                    Select Map
+                                    Generic Visualization
+                                </button>
+
+                                <lx-dropdown-menu>
+                                    <ul>
+                                        <li><a class="dropdown-link" ng-click="changeMap(1)">temperature</a></li>
+                                        <li><a class="dropdown-link" ng-click="changeMap(2)">steps</a></li>
+                                        <li><a class="dropdown-link" ng-click="changeMap(3)">heart beats</a></li>
+                                        <li class="dropdown-divider"></li>
+                                        <li><span class="dropdown-link dropdown-link--is-header">Type</span></li>
+                                        <li><a class="dropdown-link" ng-click="changeType('spline')">Spline</a> </li>
+                                        <li><a class="dropdown-link" ng-click="changeType('column')">Column</a></li>
+                                        <li><a class="dropdown-link" ng-click="changeType('area')">Range</a></li>
+                                        <li><a class="dropdown-link">Separated link</a></li>
+                                    </ul>
+                                </lx-dropdown-menu>
+                            </lx-dropdown>
+                            <lx-dropdown>
+                                <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
+                                        lx-dropdown-toggle>
+                                    Temperature
+                                </button>
+
+                                <lx-dropdown-menu>
+                                    <ul>
+                                        <li><a class="dropdown-link" ng-click="changeMap()">map 1</a></li>
+                                        <li class="dropdown-divider"></li>
+                                        <li><span class="dropdown-link dropdown-link--is-header">Header</span></li>
+                                        <li><a class="dropdown-link">Separated link</a></li>
+                                    </ul>
+                                </lx-dropdown-menu>
+                            </lx-dropdown>
+                            <lx-dropdown>
+                                <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
+                                        lx-dropdown-toggle>
+                                    Steps
+                                </button>
+
+                                <lx-dropdown-menu>
+                                    <ul>
+                                        <li><a class="dropdown-link" ng-click="changeMap()">map 1</a></li>
+                                        <li class="dropdown-divider"></li>
+                                        <li><span class="dropdown-link dropdown-link--is-header">Header</span></li>
+                                        <li><a class="dropdown-link">Separated link</a></li>
+                                    </ul>
+                                </lx-dropdown-menu>
+                            </lx-dropdown>
+                            <lx-dropdown>
+                                <button class="btn btn--m btn--black btn--flat fs-headline" lx-ripple
+                                        lx-dropdown-toggle>
+                                    Heart beats
                                 </button>
 
                                 <lx-dropdown-menu>
