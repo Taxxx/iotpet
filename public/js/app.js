@@ -9,16 +9,16 @@ angular.module("FinalApp",["lumx","ngRoute","ngResource"])
 			controller: "MapsController",
 			templateUrl: "templates/maps.html"
 		})
-		.when("/post/:id",{
-			controller: "PostController",
+		.when("/pet/:id",{
+			controller: "PetController",
 			templateUrl: "templates/post.html"
 		})
-		.when("/posts/new",{
-			controller: "NewPostController",
-			templateUrl: "templates/post_form.html"
+		.when("/pets/new",{
+			controller: "NewPetController",
+			templateUrl: "templates/pet_form.html"
 		})
-		.when("/posts/edit/:id",{
-			controller: "PostController",
-			templateUrl: "templates/post_form.html"
+		.when("/pets/edit/:id",{
+			controller: "PetController",
+			templateUrl: "templates/pet_form.html"
 		})
 });
