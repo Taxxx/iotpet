@@ -40,12 +40,26 @@
 				</div>
 			</div>
 
-			<div flex-item>
-        		<lx-file-input label="Image..."></lx-file-input>
-    		</div>
+
 		</div>
 		<div class="card__actions">
-			<button type="submit" class="btn btn--blue btn--l btn--raised">Guardar</button>
+			<button type="submit" class="btn btn--blue btn--l btn--raised">Save</button>
+			<button class="btn btn--m btn--blue btn--raised" ng-click="opendDialog('selectImg')" lx-ripple>Add Image <i class="mdi mdi-plus"></i></button>
 		</div>
+		<lx-dialog class="dialog dialog--l" id="selectImg" auto-close="true" onclose="closingDialog()" onscrollend="scrollEndDialog()">
+			<div class="dialog__header">
+				<div class="toolbar bgc-light-blue-500 pl++">
+            <span class="toolbar__label tc-white fs-title">
+                Lorem Ipsum
+            </span>
+
+					<div class="toolbar__right">
+						<button class="btn btn--l btn--white btn--icon" lx-ripple ng-click="addPerson()">
+							<i class="mdi mdi-plus"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+			</lx-dialog>
 	</div>
 </form>
