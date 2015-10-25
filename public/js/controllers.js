@@ -184,7 +184,7 @@ angular.module("FinalApp")
 		};
 
 		$scope.configHchart = function () {
-			window.io = io.connect();
+			
 			Highcharts.setOptions({
 				global: {
 					useUTC: false
@@ -202,16 +202,17 @@ angular.module("FinalApp")
 		    function coords(position){
 		//        alert(position.coords.latitude);
 		//        alert(position.coords.longitude);
-				location = position.coords.latitude+";"+position.coords.longitude
+				location = position.coords.latitude+";"+position.coords.longitude+";0.0"
 		    }
 
 
 
-			
+			window.io = io.connect();
 			io.on('data_arduino', function (data) {
-
-				Riot.addData($scope.apiKey, location, (new Date()).getTime(), null, data.temperatura, data.steps, data.heart, data.food)
+				//debugger;
+				Riot.addData($scope.apiKey, '-68.088166;-16.541178;0.0', null, null, data.temperatura, data.steps, data.heart, data.food)
 					.success(function (data) {
+						debugger;
 						//$scope.apiKey = data.apiKey;
 						//debugger;
 						//$scope.pets = data;
