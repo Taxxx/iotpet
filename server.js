@@ -70,7 +70,8 @@ arduino_server.on("message", function (msg, rinfo) {
 	var arduinoJson = {};
 	arduinoJson.temperatura = arduinoArray[0];
 	arduinoJson.steps = arduinoArray[1];
-	arduinoJson.heart_beats = arduinoArray[2];
+	arduinoJson.heart = arduinoArray[2];
+	arduinoJson.food =  arduinoArray[3];
 
 	//x=msg;
 	//debugger;
@@ -84,6 +85,7 @@ arduino_server.on("message", function (msg, rinfo) {
 //Actualiza Datos
 app.io.broadcast('data_arduino', arduinoJson);
 
+	
 });
 
 //Socket_Arduino
