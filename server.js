@@ -69,6 +69,8 @@ arduino_server.on("message", function (msg, rinfo) {
 	var arduinoArray = msg.toString().split(',');
 	var arduinoJson = {};
 	arduinoJson.temperatura = arduinoArray[0];
+	arduinoJson.steps = arduinoArray[1];
+	arduinoJson.heart_beats = arduinoArray[2];
 
 	//x=msg;
 	//debugger;

@@ -136,8 +136,9 @@ angular.module("FinalApp")
 		}
 
 		$scope.startSocket =function(series){
-			$scope.$on('data_arduino', function(data){
-				debugger;
+			window.io = io.connect();
+			io.on('data_arduino', function(data){
+				//debugger;
 				console.log(data.temperatura);
 				//$('#list_socket').append('<li>'+data.val+'</li>');
 
