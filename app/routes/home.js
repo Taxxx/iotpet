@@ -13,6 +13,37 @@ function getPets(res){
 
 module.exports = function(app) {
 
+	/*arduino_server.on("message", function(msg, rinfo) { //every time new data arrives do this:)
+		console.log('esta vivo'+msg);
+	    
+
+		});
+
+	
+	    //Actualiza Datos
+	    app.io.broadcast('data_arduino', {
+			//val: req.body.val
+			temperatura: arduinoArray[0],
+			foco: arduinoArray[1],
+			ventilador: arduinoArray[2]
+		});
+	});*/
+	/*arduino_server.on("message", function (msg, rinfo) {
+
+		debugger;
+		 // console.log(getDateTime() + msg + " from " +
+		 // rinfo.address + ":" + rinfo.port);
+		 // fs.appendFile("mydata.txt",getDateTime() + msg + crlf, encoding='utf8',function(err){});//write the value to file and add CRLF for line break
+		 console.log(msg + " from " +
+		 rinfo.address + ":" + rinfo.port);
+		 fs.appendFile("mydata.txt",getDateTime() + msg + crlf, encoding='utf8',function(err){});//write the value to file and add CRLF for line break
+	});*/
+
+
+
+
+
+
 	// api ---------------------------------------------------------------------
 	// get all pets
 	app.get('/api/pets', function(req, res) {

@@ -37,14 +37,16 @@ angular.module("FinalApp")
 			$scope.loading = false;
 		});
 
-	$scope.removePost = function(pet){
-		PostResource.delete({id: pet.id},function(data){
-			//console.log(data);
-			//$scope.posts = Post.query(); // :D
-		});
+	$scope.removePet = function(id){
+		Pets.delete(id)
+				// if successful creation, call our get function to get all the new todos
+				.success(function(data) {
+					$scope.loading = false;
+					$scope.todos = data; // assign our new list of todos
+				});
 
 		$scope.pets = $scope.pets.filter(function(element){
-			return element.id !== pet.id;
+			return element.id !== id;
 		});
 
 	}
@@ -69,15 +71,15 @@ angular.module("FinalApp")
 	}
 
 })
-.controller("PetController", function($scope,PostResource,$routeParams,$location){
+.controller("PetController", function($scope,Pets,$routeParams,$location){
 	$scope.title = "Edit Pet Data";
 	$scope.pet = PostResource.get({id: $routeParams.id});
-	$scope.savePost = function(){
-		PostResource.update({id: $scope.pet.id},{data: $scope.pet},function(data){
+	$scope.savePet = function(){
+		/*PostResource.update({id: $scope.pet.id},{data: $scope.pet},function(data){
 			console.log(data);
 			//$location.path("/");
 			$location.path("/pet/"+$scope.pet.id);
-		});
+		});*/
 	}
 })
 .controller("NewPetController", function($scope,PostResource,$location,Pets){
@@ -135,7 +137,7 @@ angular.module("FinalApp")
 
 		$scope.startSocket =function(series){
 			$scope.$on('data_arduino', function(data){
-				//debugger;
+				debugger;
 				console.log(data.temperatura);
 				//$('#list_socket').append('<li>'+data.val+'</li>');
 

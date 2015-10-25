@@ -11,6 +11,7 @@ angular.module("FinalApp")
 			return $http.post('/api/pets', petData);
 		},
 		delete : function(id) {
+			//debugger;
 			return $http.delete('/api/pets/' + id);
 		}
 	}
