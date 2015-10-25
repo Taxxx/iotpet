@@ -25,7 +25,32 @@ angular.module("FinalApp")
 	
 
 })
-.controller("BodyController", function($scope,$resource,PostResource){
+.controller("BodyController", function($scope,$resource,Pets){
+	User = $resource("http://jsonplaceholder.typicode.com/users/:id",{id:"@id"});
+
+	$scope.pets = {};
+	$scope.users = User.query();
+	// query() -> GET/posts -> Un arreglo de posts -> isArray: true 
+	Pets.get()
+		.success(function(data) {
+			$scope.pets = data;
+			$scope.loading = false;
+		});
+
+	$scope.removePost = function(pet){
+		PostResource.delete({id: pet.id},function(data){
+			//console.log(data);
+			//$scope.posts = Post.query(); // :D
+		});
+
+		$scope.pets = $scope.pets.filter(function(element){
+			return element.id !== pet.id;
+		});
+
+	}
+
+})
+.controller("UsersController", function($scope,$resource,PostResource){
 	User = $resource("http://jsonplaceholder.typicode.com/users/:id",{id:"@id"});
 
 	$scope.pets = PostResource.query();
@@ -55,14 +80,28 @@ angular.module("FinalApp")
 		});
 	}
 })
-.controller("NewPetController", function($scope,PostResource,$location){
+.controller("NewPetController", function($scope,PostResource,$location,Pets){
 	$scope.pet = {};
 	$scope.title = "Add a New Pet";
-	$scope.savePost = function(){
-		PostResource.save({data: $scope.pet},function(data){
+	$scope.savePet = function(){
+		/*PostResource.save({data: $scope.pet},function(data){
 			console.log(data);
 			$location.path("/");
-		});
+		});*/
+		console.log($scope.pet);
+
+		// call the create function from our service (returns a promise object)
+		Pets.create($scope.pet)
+
+			// if successful creation, call our get function to get all the new todos
+			.success(function(data) {
+				//$scope.loading = false;
+				//$scope.formData = {}; // clear the form so our user is ready to enter another
+				//$scope.todos = data; // assign our new list of todos
+				$location.path("/");
+				console.log("data: "+data);
+			});
+
 	}
 })
 .controller("MapsController", function($scope,PostResource,$location){

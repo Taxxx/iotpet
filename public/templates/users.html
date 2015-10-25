@@ -1,0 +1,20 @@
+<div class="card top-space" ng-repeat="user in users">
+    <div flex-container="row">
+        <div class="card__img card__img--left" style="height: 160px;">
+            <img src="imgs/user.jpg">
+        </div>
+        <div flex-item flex-container="column">
+            <div flex-item>
+                <strong class="fs-headline display-block">
+                    {{user.name}}
+                </strong>
+                <strong class="fs-subhead tc-black-2 display-block">
+                    {{user.email}}
+                </strong>
+            </div>
+            <div class="card__actions">
+                <a href="#">Ver usuarios</a>
+            </div>
+        </div>
+    </div>
+</div>

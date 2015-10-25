@@ -4,11 +4,11 @@
             <div class="card top-space" ng-repeat="pet in pets">
                 <div class="p+">
                     <strong class="fs-headline display-block tc-red-900">
-                        {{pet.title}}
+                        {{pet.name}}
                     </strong>
 
                     <div class="paragraph fs-body-1 mt+">
-                        {{pet.body}}
+                        {{pet.breed}}
                     </div>
                 </div>
                 <div class="card__actions">
@@ -19,27 +19,8 @@
             </div>
         </div>
     </lx-tab>
-    <lx-tab heading="Users">
-        <div class="card top-space" ng-repeat="user in users">
-            <div flex-container="row">
-                <div class="card__img card__img--left" style="height: 160px;">
-                    <img src="imgs/user.jpg">
-                </div>
-                <div flex-item flex-container="column">
-                    <div flex-item>
-                        <strong class="fs-headline display-block">
-                            {{user.name}}
-                        </strong>
-                        <strong class="fs-subhead tc-black-2 display-block">
-                            {{user.email}}
-                        </strong>
-                    </div>
-                    <div class="card__actions">
-                        <a href="#">Ver usuarios</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <lx-tab heading="Maps">
+        
     </lx-tab>
     <lx-tab heading="Graphics & Reports">
         <div class="card top-space">
