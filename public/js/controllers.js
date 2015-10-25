@@ -43,6 +43,7 @@ angular.module("FinalApp")
 			//$scope.loading = false;
 			$scope.loginSuccess();
 			$scope.closeDialog('test');
+			$scope.islogged = true;
 			//closingDialog()
 			$location.path("/principal"); 
 		})

@@ -29,9 +29,11 @@ a,a:visited{
 
 }
 .tarjeta{
+
 	width: 400px;
 	height: 200px;
-	/*margin-top: 149px !important;*/
+	margin-top: 149px !important;
+	margin-left: -129px !important;
 
 }
 .titulo{
@@ -53,8 +55,9 @@ margin-bottom: 33px;
 body{
 	font-family: cursive !important;
 }
-.derecha{
-	margin-left: 400px !important;
+.derecha {
+	margin-left: 173px !important;
+	margin-top: -316px !important;
 }
 .lista{
 	MARGIN-LEFT: -1050px !important;
