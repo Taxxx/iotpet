@@ -26,9 +26,10 @@
     <nav class="main-nav main-nav--lap-and-up">
         <ul>
             <!--li><a href="#/" class="main-nav__link" lx-ripple="white">Home</a></li-->
-            <li><a href="#/users" class="main-nav__link" lx-ripple="white"><!--i class="mdi mdi-plus-circle"></i-->Users</a></li>
-			<li><a href="#/pets/new" class="main-nav__link" lx-ripple="white"><i class="mdi mdi-plus-circle"></i>Pet</a></li>
+            <li ng-hide="!islogged"><a href="#/users" class="main-nav__link" lx-ripple="white"><!--i class="mdi mdi-plus-circle"></i-->Users</a></li>
+			<li ng-hide="!islogged"><a href="#/pets/new" class="main-nav__link" lx-ripple="white"><i class="mdi mdi-plus-circle"></i>Pet</a></li>
 			<li><a href="" lx-ripple="white" class="main-nav__link" ng-click="opendDialog('test')" lx-ripple>Login</a></li>
+			<li><a href="#/aboutUs" lx-ripple="white" class="main-nav__link"  lx-ripple>About Us</a></li>
         </ul>
     </nav>
 

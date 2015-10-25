@@ -9,6 +9,9 @@ angular.module("FinalApp",["lumx","ngRoute","ngResource","ngTouch"])
 			controller: "BodyController",
 			templateUrl: "templates/home.html"
 		})
+		.when("/aboutUs", {
+			templateUrl: "templates/home3.html"
+		})
 		.when("/users", {
 			controller: "UsersController",
 			templateUrl: "templates/users.html"
