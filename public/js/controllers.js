@@ -2,6 +2,7 @@ angular.module("FinalApp")
 .controller("MainController", function($scope,LxDialogService,LxNotificationService,Riot){
 	//$scope.title = "Login";
 	$scope.user = {};
+	$scope.islogged = false;
 
 	/*Riot.login()
 		.success(function(data) {
