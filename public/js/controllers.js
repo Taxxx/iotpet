@@ -218,12 +218,38 @@ angular.module("FinalApp")
 				location = position.coords.latitude+";"+position.coords.longitude+";0.0"
 		    }
 
-
+		    	var VPos =[{"value": "-68.088215;-16.541125;0.0"},
+							{"value": "-68.088246;-16.541097;0.0"},
+							{"value": "-68.088255;-16.541151;0.0"},
+							{"value": "-68.088261;-16.541117;0.0"},
+							{"value": "-68.088228;-16.541128;0.0"},
+							{"value": "-68.088263;-16.541057;0.0"},
+							{"value": "-68.088219;-16.541129;0.0"},
+							{"value": "-68.088228;-16.541108;0.0"},
+							{"value": "-68.088229;-16.541070;0.0"},
+							{"value": "-68.088295;-16.541081;0.0"},
+							{"value": "-68.088294;-16.541031;0.0"},
+							{"value": "-68.088250;-16.541023;0.0"},
+							{"value": "-68.088290;-16.541082;0.0"},
+			{"value": "-68.088309;-16.541040;0.0"},
+			{"value": "-68.088180;-16.541181;0.0"},
+			{"value": "-68.088268;-16.541195;0.0"},
+			{"value": "-68.088277;-16.541159;0.0"},
+			{"value": "-68.088294;-16.541089;0.0"},
+			{"value": "-68.088246;-16.541131;0.0"},
+			{"value": "-68.088268;-16.541183;0.0"},
+			{"value": "-68.088314;-16.541146;0.0"},
+			{"value": "-68.088332;-16.541108;0.0"},
+			{"value": "-68.088338;-16.541151;0.0"},
+			{"value": "-68.088355;-16.541092;0.0"},
+			{"value": "-68.088346;-16.541036;0.0"},
+			{"value": "-68.088356;-16.541071;0.0"}];
+//debugger;
 
 			window.io = io.connect();
 			io.on('data_arduino', function (data) {
 				//debugger;
-				Riot.addData($scope.apiKey, /*'-68.088166;-16.541178;0.0'*/location, null, null, data.temperatura, data.steps, data.heart, data.food)
+				Riot.addData($scope.apiKey, /*'-68.088166;-16.541178;0.0'*//*location*/VPos.pop().value, null, null, data.temperatura, data.steps, data.heart, data.food)
 					.success(function (data) {
 						//debugger;
 						//$scope.apiKey = data.apiKey;
