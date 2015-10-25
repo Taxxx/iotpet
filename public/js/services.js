@@ -17,16 +17,21 @@ angular.module("FinalApp")
 	}
 }])
 .factory('Riot', ['$http',function($http) {
-	var params_login = {
-		"username": "arduino5", 
-    	"password": "bth101"
-	};
+	
 
 	
 
 
 	return {
-		login : function() {
+		login : function(user) {
+
+			var params_login = {
+			/*"username": "arduino5", 
+	    	"password": "bth101"*/
+
+	    	"username": user.username, 
+	    	"password": user.password
+		};
 
 			var http = $http({
 				method: 'POST',

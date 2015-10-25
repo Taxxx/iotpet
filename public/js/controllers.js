@@ -1,5 +1,5 @@
 angular.module("FinalApp")
-.controller("MainController", function($scope,LxDialogService,LxNotificationService,Riot){
+.controller("MainController", function($scope,LxDialogService,LxNotificationService,Riot,$location){
 	//$scope.title = "Login";
 	$scope.user = {};
 
@@ -21,14 +21,34 @@ angular.module("FinalApp")
 			//$scope.loading = false;
 		});*/
 
-		
-	$scope.Login = function(){
+	$scope.Logout = function(){
+		$location.path("/");
+	}
+
+	$scope.Login = function(user){
 		//debugger;
 		//alert($scope.user.username);
 		/*PostResource.save({data: $scope.post},function(data){
 			console.log(data);
 			$location.path("/");
 		});*/
+	
+		Riot.login($scope.user)
+		.success(function(data) {
+			//$scope.apiKey = data.apiKey;
+			//debugger;
+			//debugger;
+			//$scope.pets = data;
+			//$scope.loading = false;
+			$scope.loginSuccess();
+			$scope.closeDialog('test');
+			//closingDialog()
+			$location.path("/principal"); 
+		})
+		.error(function(data){
+			$scope.loginFail();
+		});
+
 	}
 
 	$scope.opendDialog = function(dialogId)
@@ -36,9 +56,24 @@ angular.module("FinalApp")
 	    LxDialogService.open(dialogId);
 	};
 
+	$scope.closeDialog = function(dialogId)
+	{
+	    LxDialogService.close(dialogId);
+	};
+
 	$scope.closingDialog = function()
 	{
 	    LxNotificationService.info('Login closed!');
+	};
+
+	$scope.loginSuccess = function()
+	{
+	    LxNotificationService.info('Login Success :D');
+	};
+
+	$scope.loginFail = function()
+	{
+	    LxNotificationService.info('Login Fail :(!');
 	};
 
 
@@ -149,6 +184,7 @@ angular.module("FinalApp")
 		};
 
 		$scope.configHchart = function () {
+			window.io = io.connect();
 			Highcharts.setOptions({
 				global: {
 					useUTC: false
@@ -158,10 +194,23 @@ angular.module("FinalApp")
 
 		$scope.startSocket = function (series) {
 
-			window.io = io.connect();
+			var location = "";
+			setInterval(function () {
+		        navigator.geolocation.getCurrentPosition(coords);
+
+		    }, 3000);
+		    function coords(position){
+		//        alert(position.coords.latitude);
+		//        alert(position.coords.longitude);
+				location = position.coords.latitude+";"+position.coords.longitude
+		    }
+
+
+
+			
 			io.on('data_arduino', function (data) {
 
-				Riot.addData($scope.apiKey, '-68.088135;-16.541182;0.0', (new Date()).getTime(), null, data.temperatura, data.steps, data.heart, data.food)
+				Riot.addData($scope.apiKey, location, (new Date()).getTime(), null, data.temperatura, data.steps, data.heart, data.food)
 					.success(function (data) {
 						//$scope.apiKey = data.apiKey;
 						//debugger;
@@ -171,20 +220,20 @@ angular.module("FinalApp")
 
 
 				//debugger;
-				console.log(data.temperatura);
+				//console.log(data.temperatura);
 				//$('#list_socket').append('<li>'+data.val+'</li>');
 
-				tiempo = (new Date()).getTime(), // current time
+				tiempo = (new Date()).getTime(); // current time
 
-					temperatura = Math.random();
+					//temperatura = Math.random();
 
-				//temperatura = parseInt(data.temperatura);
+				temperatura = parseInt(data.temperatura);
 				//
-				console.log('foco: ' + data.foco + ' - ventilador: ' + data.ventilador);
+				//console.log('foco: ' + data.foco + ' - ventilador: ' + data.ventilador);
 
 				series.addPoint([tiempo, temperatura], true, true);
 
-				if (temperatura < 25) {
+				/*if (temperatura < 25) {
 					//alert("temperatura baja");
 					//$('#alertas').prepend("<br><font color='blue'>Temperatura Baja: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
 					$('#mensaje').prepend($('<li>').text("Temperatura Baja: " + Highcharts.numberFormat(temperatura, 5) + " Hrs: " + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', tiempo) + "\n").attr('style', 'background:#B2B2B2;border-style: groove; font-family: "Montserrat";border-radius: 15px;'));
@@ -198,7 +247,7 @@ angular.module("FinalApp")
 					//alert("temperatura baja");
 					//$('#alertas').prepend("<br><font color='green'>Temperatura Normal: "+Highcharts.numberFormat(temperatura, 5)+" Hrs: "+Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',tiempo) +" </font>");
 					$('#mensaje').prepend($('<li>').text("Temperatura Normal: " + Highcharts.numberFormat(temperatura, 5) + " Hrs: " + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', tiempo) + "\n").attr('style', 'background:#00FF3B; border-style: groove;font-family: "Montserrat";border-radius: 15px;'));
-				}
+				}*/
 
 				//$scope.movimiento(data.foco,data.ventilador);
 
