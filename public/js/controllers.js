@@ -159,7 +159,7 @@ angular.module("FinalApp")
 			window.io = io.connect();
 			io.on('data_arduino', function(data){
 
-				Riot.addData($scope.apiKey,'-68.088135;-16.541182;0.0',null,null,data.temperatura)
+				Riot.addData($scope.apiKey,'-68.088135;-16.541182;0.0',(new Date()).getTime(),null,data.temperatura,data.steps,data.heart,data.food)
 					.success(function(data) {
 						//$scope.apiKey = data.apiKey;
 						//debugger;
@@ -167,7 +167,7 @@ angular.module("FinalApp")
 						//$scope.loading = false;
 					});
 
-				
+
 				//debugger;
 				console.log(data.temperatura);
 				//$('#list_socket').append('<li>'+data.val+'</li>');

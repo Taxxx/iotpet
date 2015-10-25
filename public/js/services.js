@@ -36,7 +36,7 @@ angular.module("FinalApp")
 
 			//return $http.post('http://vizix.hackiot.com:8080/riot-core-services/api/user/login',{username:"arduino",password:"bth101"});
 		},
-		addData : function(api_key,location,timestamp,locationXYZ,temperature) {
+		addData : function(api_key,location,timestamp,locationXYZ,temperature,steps,heart,food) {
 			//debugger;
 			var params_data = {
 				"group": ">hackathon>arduino5",
@@ -59,7 +59,19 @@ angular.module("FinalApp")
 							"temperature": {
 												//"value": "71"
 												"value": temperature
-										   }
+										   },
+						   	"steps": 		{
+												//"value": "71"
+												"value": steps
+										   	},
+						   	"heart": 		{
+												//"value": "71"
+												"value": heart
+										   	},
+						   	"food": 		{
+												//"value": "71"
+												"value": food
+										   	}
 				}
 			};
 
