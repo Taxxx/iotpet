@@ -1,18 +1,18 @@
-<form ng-submit="savePet()">
+<form ng-submit="saveUser()">
 	<div class="card top-space">
 		<div class="p+">
 			<h1>{{title}}</h1>
 				<div flex-item>
-					<lx-text-field label="Name">
-						<input type="text" ng-model="pet.name">
+					<lx-text-field label="First Name">
+						<input type="text" ng-model="user.firstname">
 					</lx-text-field>
 				</div>
 			
 
 			<div flex-container="row">
 				<div flex-item>
-					<lx-text-field label="Specie">
-						<textarea ng-model="pet.specie">
+					<lx-text-field label="Last Name">
+						<textarea ng-model="user.lastname">
 
 						</textarea>
 					</lx-text-field>
@@ -22,18 +22,8 @@
 
 			<div flex-container="row">
 				<div flex-item>
-					<lx-text-field label="Breed">
-						<textarea ng-model="pet.breed">
-
-						</textarea>
-					</lx-text-field>
-				</div>
-			</div>
-
-			<div flex-container="row">
-				<div flex-item>
-					<lx-text-field label="Weight">
-						<textarea ng-model="pet.weight">
+					<lx-text-field label="Email">
+						<textarea ng-model="user.email">
 
 						</textarea>
 					</lx-text-field>
