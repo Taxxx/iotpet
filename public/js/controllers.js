@@ -42,7 +42,7 @@ angular.module("FinalApp")
 			//$scope.pets = data;
 			//$scope.loading = false;
 			$scope.loginSuccess();
-			//$scope.closeDialog('test');
+			$scope.closeDialog('test');
 			//$scope.islogged = true;
 			//closingDialog()
 			$location.path("/principal"); 
