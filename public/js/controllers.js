@@ -34,22 +34,22 @@ angular.module("FinalApp")
 			$location.path("/");
 		});*/
 	
-		Riot.login($scope.user)
-		.success(function(data) {
+		//Riot.login($scope.user)
+		//.success(function(data) {
 			//$scope.apiKey = data.apiKey;
 			//debugger;
 			//debugger;
 			//$scope.pets = data;
 			//$scope.loading = false;
 			$scope.loginSuccess();
-			$scope.closeDialog('test');
-			$scope.islogged = true;
+			//$scope.closeDialog('test');
+			//$scope.islogged = true;
 			//closingDialog()
 			$location.path("/principal"); 
-		})
-		.error(function(data){
-			$scope.loginFail();
-		});
+		//})
+		//.error(function(data){
+		//	$scope.loginFail();
+		//});
 
 	}
 
@@ -257,6 +257,14 @@ angular.module("FinalApp")
 						//debugger;
 						//$scope.pets = data;
 						//$scope.loading = false;
+					})
+					.error(function (err) {
+						//debugger;
+						//$scope.apiKey = data.apiKey;
+						//debugger;
+						//$scope.pets = data;
+						//$scope.loading = false;
+						console.log(err);
 					});
 
 
